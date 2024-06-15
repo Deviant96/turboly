@@ -32,7 +32,7 @@
         button {
             width: 100%;
             padding: 12px;
-            background: #007bff;
+            background: var(--primary-color);
             color: white;
             border: none;
             border-radius: 5px;
@@ -96,7 +96,7 @@
             margin-bottom: 10px;
             background: #f1f1f1;
             border-radius: 5px;
-            border-left: 5px solid #007bff;
+            border-left: 5px solid var(--primary-color);
         }
 
         #taskList li.completed {
@@ -118,7 +118,7 @@
             background: none;
             border: none;
             cursor: pointer;
-            color: #007bff;
+            color: var(--primary-color);
             font-size: 1.2em;
             transition: color 0.3s;
         }
@@ -139,11 +139,25 @@
             background: #ddd;
             cursor: not-allowed;
         }
+
+        .logout-button {
+            background: #dc3545;
+        }
+
+        .logout-button:hover {
+            background: #c82333;
+        }
     </style>
 @endsection
 
 @section('content')
     <div class="container">
+        @if (auth()->check())
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="logout-button">Logout</button>
+            </form>
+        @endif
         <h2>Tasks</h2>
         <form id="taskForm" method="POST" action="{{ route('tasks.store') }}">
             @csrf
