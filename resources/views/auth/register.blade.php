@@ -1,30 +1,84 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
-    <link rel="stylesheet" href="{{ asset('css/auth.css') }}">
-</head>
-<body>
-    <div class="container">
-        <h2>Register</h2>
-        <form id="registerForm">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
+@extends('layouts.layout')
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
+@section('styles')
+    <style>
+        .register-link {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
 
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
+        .register-link a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
 
-            <label for="password_confirmation">Confirm Password:</label>
-            <input type="password" id="password_confirmation" name="password_confirmation" required>
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+@endsection
 
-            <button type="submit">Register</button>
+@section('content')
+    <h1>Register</h1>
+    <div class="form-container">
+        <form class="form" id="registerForm">
+            @csrf
+            <x-input type="text" name="username" id="username" label="Username" value="{{ old('username') }}"
+                icon="fa fa-user" required />
+            <x-input type="password" name="password" id="password" label="Password" value="{{ old('password') }}"
+                icon="fa fa-lock" required />
+            <x-input type="password" name="password_confirmation" id="password_confirmation" label="Confirm Password"
+                icon="fa fa-lock" required />
+            <div id="error-message" style="color: red;"></div>
+            <button type="submit" class="form-button">Register</button>
+            <div></div>
         </form>
+        <p class="register-link">Already have an account? <a href="{{ route('loginView') }}">Sign in</a></p>
     </div>
-    <script src="{{ asset('js/auth.js') }}"></script>
-</body>
-</html>
+    </div>
+@endsection
+
+@section('scripts')
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            document.getElementById('registerForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+                const password_confirmation = document.getElementById('password_confirmation').value;
+
+                const errorMessage = document.getElementById('error-message');
+                errorMessage.textContent = '';
+                if (password !== password_confirmation) {
+                    errorMessage.textContent = 'Passwords do not match.';
+                    return;
+                }
+                console.log("Fetch section")
+                fetch('/register', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
+                                .getAttribute('content')
+                        },
+                        body: JSON.stringify({
+                            username,
+                            password,
+                            password_confirmation
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log("data");
+                        if (data.success) {
+                            window.location.href = '/login';
+                        } else {
+                            alert(data.message);
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+            });
+        });
+    </script>
+@endsection

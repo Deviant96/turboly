@@ -8,8 +8,8 @@ Route::get('/', function () {
     return redirect('/login');
 });
 
-Route::get('/register', [RegisterController::class, 'showRegistrationForm']);
-Route::post('/register', [RegisterController::class, 'register']);
-Route::get('/login', [LoginController::class, 'showLoginForm']);
-Route::post('/login', [LoginController::class, 'login']);
+Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('registerView');
+Route::post('/register', [RegisterController::class, 'register'])->name('register');
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('loginView');
+Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
