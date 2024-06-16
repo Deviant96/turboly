@@ -2,6 +2,15 @@
 
 @section('styles')
     <style>
+        .main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            flex-direction: column;
+        }
         .register-link {
             margin-top: 1rem;
             font-size: 0.9rem;

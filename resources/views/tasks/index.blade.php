@@ -68,6 +68,9 @@
                     <option value="priority-desc">Priority (high-low)</option>
                 </select>
             </div>
+            @if ($tasks->isEmpty())
+                <div style="font-style: italic; color: gray">No task yet</div>
+            @endif
             <ul id="taskList">
                 @foreach ($tasks as $task)
                     <li
