@@ -8,9 +8,9 @@ body, h2, h3, ul, li, form, input, select, button {
     box-sizing: border-box;
 }
 
-
-
-
+body {
+    font-family: "Roboto", Arial, sans-serif;
+}
 
 .button {
     color: white;
