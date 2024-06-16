@@ -59,7 +59,6 @@
         <main>
             <div id="alertDueToday" class="alert-due-today" style="display: none;">You have tasks due today!</div>
             <div class="sort-controls">
-                <label for="sortTasks">Sort Tasks:</label>
                 <select id="sortTasks">
                     <option value="due-date-asc">Due Date (⬆)</option>
                     <option value="due-date-desc">Due Date (⬇)</option>

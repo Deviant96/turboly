@@ -295,20 +295,21 @@ select {
 
 .sort-controls {
     display: flex;
-    justify-content: space-between;
+    align-items: center;
     margin-bottom: 20px;
 }
 
-.sort-button {
-    background: #6c757d;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s;
+.sort-controls label {
+    margin-right: 10px;
+    font-weight: bold;
+    color: #555;
 }
 
-.sort-button:hover {
-    background: #5a6268;
+.sort-controls select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #555;
+    background-color: #f9f9f9;
 }
