@@ -58,10 +58,22 @@
 
         <main>
             <div id="alertDueToday" class="alert-due-today" style="display: none;">You have tasks due today!</div>
+            <div class="sort-controls">
+                <label for="sortTasks">Sort Tasks:</label>
+                <select id="sortTasks">
+                    <option value="due-date-asc">Due Date (⬆)</option>
+                    <option value="due-date-desc">Due Date (⬇)</option>
+                    <option value="description-asc">Description (A-Z)</option>
+                    <option value="description-desc">Description (Z-A)</option>
+                    <option value="priority-asc">Priority (low-high)</option>
+                    <option value="priority-desc">Priority (high-low)</option>
+                </select>
+            </div>
             <ul id="taskList">
                 @foreach ($tasks as $task)
                     <li
-                        class="task-item {{ \Carbon\Carbon::parse($task->due_date)->lessThanOrEqualTo(\Carbon\Carbon::today()) ? 'due-today' : '' }} {{ $task->is_completed ? 'completed' : '' }}">
+                        class="task-item {{ \Carbon\Carbon::parse($task->due_date)->lessThanOrEqualTo(\Carbon\Carbon::today()) ? 'due-today' : '' }} {{ $task->is_completed ? 'completed' : '' }}"
+                        data-due-date="{{ $task->due_date }}" data-description="{{ $task->description }}" data-priority="{{ $task->priority }}">
                         <div class="task-content">
                             <h4 class="task-description">{{ $task->description }}</h4>
                             <p class="task-priority">{{ $task->priority }}</p>
@@ -101,6 +113,7 @@
         const completedTasks = document.querySelectorAll('#taskList li.completed');
         const dueTodayTasks = document.querySelectorAll('#taskList li.due-today:not(.completed)');
         const alertDueToday = document.getElementById('alertDueToday');
+        const sortTasksSelect = document.getElementById('sortTasks');
 
         if (completedTasks.length === 0) {
             clearCompletedButton.disabled = true;
@@ -166,6 +179,48 @@
             overlay.classList.add('hidden');
             formContainer.classList.remove('show');
             document.getElementById('taskForm').reset();
+        }
+
+        sortTasksSelect.addEventListener('change', function () {
+            const value = this.value;
+            let attribute, order;
+
+            if (value.includes('due-date')) {
+                attribute = 'data-due-date';
+            } else if (value.includes('description')) {
+                attribute = 'data-description';
+            } else if (value.includes('priority')) {
+                attribute = 'data-priority';
+            }
+
+            order = value.includes('asc') ? 'asc' : 'desc';
+
+            sortTasks(attribute, order);
+        });
+
+        function sortTasks(attribute, order) {
+            const taskList = document.getElementById('taskList');
+            const tasks = Array.from(taskList.querySelectorAll('li'));
+            
+            tasks.sort((a, b) => {
+                if (attribute === 'data-due-date') {
+                    return order === 'asc' 
+                        ? new Date(a.getAttribute(attribute)) - new Date(b.getAttribute(attribute))
+                        : new Date(b.getAttribute(attribute)) - new Date(a.getAttribute(attribute));
+                } else if (attribute === 'data-priority') {
+                    const priorityOrder = { 'Low': 1, 'Medium': 2, 'High': 3 };
+                    return order === 'asc' 
+                        ? priorityOrder[a.getAttribute(attribute)] - priorityOrder[b.getAttribute(attribute)]
+                        : priorityOrder[b.getAttribute(attribute)] - priorityOrder[a.getAttribute(attribute)];
+                } else {
+                    return order === 'asc'
+                        ? a.getAttribute(attribute).localeCompare(b.getAttribute(attribute))
+                        : b.getAttribute(attribute).localeCompare(a.getAttribute(attribute));
+                }
+            });
+
+            taskList.innerHTML = '';
+            tasks.forEach(task => taskList.appendChild(task));
         }
     });
 </script>

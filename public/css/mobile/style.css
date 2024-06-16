@@ -292,3 +292,23 @@ select {
 .logout-button:hover {
     color: #c82333;
 }
+
+.sort-controls {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.sort-button {
+    background: #6c757d;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.sort-button:hover {
+    background: #5a6268;
+}
