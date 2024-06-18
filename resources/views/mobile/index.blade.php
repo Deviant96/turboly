@@ -70,7 +70,11 @@
                 </select>
             </div>
             @if ($tasks->isEmpty())
-                <div style="font-style: italic; color: gray">No task yet</div>
+                <div class="empty-task" style="font-style: italic; color: gray">
+                    <img src="{{ asset('images/check.png') }}" alt="" />
+                    <p>Looks like you have completed all the tasks!</p>
+                    <small>Tap the button on the right bottom side to add new task</small>
+                </div>
             @endif
             <ul id="taskList">
                 @foreach ($tasks as $task)
