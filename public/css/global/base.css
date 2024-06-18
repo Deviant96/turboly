@@ -9,47 +9,6 @@ body, h2, h3, ul, li, form, input, select, button {
 }
 
 body {
-    font-family: "Roboto", Arial, sans-serif;
+    font-family: "Inter", Arial, sans-serif;
 }
 
-.button {
-    color: white;
-    background-color: var(--primary-color);
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.button:hover {
-    background-color: var(--primary-color-dark);
-}
-
-.form-container {
-    background-color: white;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.form {
-    display: flex;
-    flex-direction: column;
-}
-
-.form-button {
-    margin-top: 2rem;
-    width: 100%;
-    padding: 0.5rem;
-    font-size: 1rem;
-    color: white;
-    background-color: var(--primary-color);
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.form-button:hover {
-    background-color: #e13383;
-}

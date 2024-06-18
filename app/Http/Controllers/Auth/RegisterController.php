@@ -11,6 +11,9 @@ class RegisterController extends Controller
 {
     public function showRegistrationForm()
     {
+        if (request('isMobile')) {
+            return view('mobile.auth.register');
+        }
         return view('auth.register');
     }
 

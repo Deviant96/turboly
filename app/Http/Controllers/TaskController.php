@@ -11,7 +11,11 @@ class TaskController extends Controller
     public function index()
     {
         $tasks = Auth::user()->tasks()->orderBy('due_date')->get();
-        return view('tasks.index', compact('tasks'));
+
+        if (request('isMobile')) {
+            return view('mobile.index', compact('tasks'));
+        }
+        return view('desktop.index', compact('tasks'));
     }
 
     public function store(Request $request)

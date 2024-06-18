@@ -6,7 +6,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\TaskController;
 
 Route::get('/', function () {
-    return redirect('/login');
+    return redirect('/dashboard');
 });
 
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('registerView');
