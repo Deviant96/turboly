@@ -6,7 +6,7 @@
         position: absolute;
         right: 0;
         top: 0;
-        transform: translate(-85%, 125%);
+        transform: translate(-125%, 100%);
         border: none;
         background: transparent;
         color: gray;
@@ -26,7 +26,9 @@
 <div class="container task-container">
     <div id="overlay" class="hidden">
         <div id="formContainer" class="form-hidden">
-            <button id="closeFormBtn" class="close-btn">Close</i></button>
+            <button id="closeFormBtn" class="close-btn">
+                <img src="{{ asset('images/close.png') }}" alt="" width="20px" />
+            </button>
             <h2>Tasks</h2>
             <form id="taskForm" method="POST" action="{{ route('tasks.store') }}">
                 @csrf

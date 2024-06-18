@@ -38,6 +38,10 @@ select {
     align-items: center;
 }
 
+.greet-message {
+    color: #00000082;
+}
+
 .button {
     width: 100%;
     padding: 12px;
@@ -48,10 +52,7 @@ select {
     font-size: 16px;
     cursor: pointer;
     transition: background 0.3s;
-}
-
-.button:hover {
-    background: var(--primary-color-dark);
+    font-weight: bold;
 }
 
 .form-group select {
@@ -229,10 +230,6 @@ select {
     text-decoration: underline;
 }
 
-.clear-completed:hover {
-    color: #424242;
-}
-
 .clear-completed:disabled {
     color: #8b8b8b;
     cursor: not-allowed;
@@ -306,16 +303,8 @@ select {
     border-radius: 3px;
 }
 
-.icon-button:hover {
-    background-color: var(--primary-color-dark);
-}
-
 .icon-button .fa-trash {
     color: #acacac;
-}
-
-.icon-button:hover i {
-    color: #f1f1f1;
 }
 
 .alert-due-today {
@@ -336,14 +325,13 @@ select {
 }
 
 .logout-button {
-    color: #dc3545;
     border: none;
-    background-color: transparent;
-    font-weight: 800;
-}
-
-.logout-button:hover {
-    color: #c82333;
+    background-color: #ff66a3;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    color: white;
 }
 
 .sort-controls {

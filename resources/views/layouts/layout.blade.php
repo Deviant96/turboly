@@ -27,7 +27,7 @@
 <body>
     @if (auth()->check())
         <nav class="nav">
-            <div>Hi, {{ Auth::user()->username }}</div>
+            <div class="greet-message">Hi, {{ Auth::user()->username }}</div>
             <div>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
