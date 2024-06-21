@@ -77,28 +77,33 @@
                         class="task-item {{ \Carbon\Carbon::parse($task->due_date)->lessThanOrEqualTo(\Carbon\Carbon::today()) ? 'due-today' : '' }} {{ $task->is_completed ? 'completed' : '' }}"
                         data-due-date="{{ $task->due_date }}" data-description="{{ $task->description }}" data-priority="{{ $task->priority }}">
                         <div class="task-content">
-                            <h4 class="task-description">{{ $task->description }}</h4>
-                            <p class="task-priority">{{ $task->priority }}</p>
-                            <p class="task-due">{{ $task->due_date }}</p>
+                            <div class="task-content-header">
+                                <h4 class="task-description">{{ $task->description }}</h4>
+                                <p class="task-priority">{{ $task->priority }}</p>
+                            </div>
+                            <div class="task-content-footer">
+                                <p class="task-due">{{ $task->due_date }}</p>
+                                <div class="task-actions">
+                                    <form method="POST" action="{{ route('tasks.destroy', $task->id) }}" class="delete-form"
+                                        style="display: inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="icon-button" title="Delete Task">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </form>
+                                    <form method="POST" action="{{ route('tasks.update', $task->id) }}" style="display: inline;">
+                                        @csrf
+                                        @method('PUT')
+                                        <button type="submit" class="icon-button"
+                                            title="{{ $task->is_completed ? 'Mark Incomplete' : 'Mark Complete' }}">
+                                            <i class="fas {{ $task->is_completed ? 'fa-undo' : 'fa-check' }}"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
-                        <div class="task-actions">
-                            <form method="POST" action="{{ route('tasks.destroy', $task->id) }}" class="delete-form"
-                                style="display: inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="icon-button" title="Delete Task">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </form>
-                            <form method="POST" action="{{ route('tasks.update', $task->id) }}" style="display: inline;">
-                                @csrf
-                                @method('PUT')
-                                <button type="submit" class="icon-button"
-                                    title="{{ $task->is_completed ? 'Mark Incomplete' : 'Mark Complete' }}">
-                                    <i class="fas {{ $task->is_completed ? 'fa-undo' : 'fa-check' }}"></i>
-                                </button>
-                            </form>
-                        </div>
+                        
                     </li>
                 @endforeach
             </ul>
