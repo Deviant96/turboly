@@ -13,11 +13,14 @@
         <div class="form-container">
             <form class="form" id="loginForm">
                 @csrf
+                <div id="error-message">
+                    <div class="err-title">Oops! Something went wrong.</div>
+                    <div class="err-message"></div>
+                </div>
                 <x-input type="text" name="username" id="username" label="Username" value="{{ old('username') }}"
                     icon="fa fa-user" />
                 <x-input type="password" name="password" id="password" label="Password" value="{{ old('password') }}"
                     icon="fa fa-lock" />
-                <div id="error-message" style="color: red;"></div>
                 <button type="submit" class="form-button">Login</button>
             </form>
             <p class="register-link">Don't have account? <a href="{{ route('registerView') }}">Sign Up</a></p>
@@ -35,7 +38,9 @@
                     const password = document.getElementById('password').value;
 
                     const errorMessage = document.getElementById('error-message');
-                    errorMessage.textContent = '';
+                    const errorText = errorMessage.querySelector('.err-message');
+                    errorMessage.style.display = "none"; 
+                    errorText.textContent = '';
 
                     fetch('/login', {
                             method: 'POST',
@@ -55,7 +60,8 @@
                             if (data.success) {
                                 window.location.href = '/dashboard';
                             } else {
-                                errorMessage.textContent = data.message;
+                                errorMessage.style.display = "block"; 
+                                errorText.textContent = data.message;
                             }
                         })
                         .catch(error => console.error('Error:', error));

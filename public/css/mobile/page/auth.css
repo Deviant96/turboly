@@ -21,8 +21,8 @@
     background: var(--primary-color);
     background: linear-gradient(
         228deg,
-        rgba(255, 153, 200, 1) 0%,
-        rgba(255, 190, 220, 1) 100%
+        rgba(104, 116, 220, 1) 0%,
+        rgba(135, 144, 218, 1) 100%
     );
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
@@ -60,6 +60,7 @@
     transition: background-color 0.3s;
     padding: 8px 40px;
     font-weight: bold;
+    box-shadow: 2px 2px 2px 1px rgb(0 0 0 / 20%);
 }
 
 .form-group {
@@ -67,7 +68,7 @@
 }
 .form-group input {
     background: transparent;
-    border-bottom: 1px solid #fff;
+    border-bottom: 1px solid #ffffff3d;
 }
 .form-group .placeholder,
 .form-group input:focus + .placeholder,
